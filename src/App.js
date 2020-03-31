@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 
 class App extends Component{
   render() {
-    return (
-      React.createElement(
-        "h1",
-        null,
-        "Hello World!"
-      )
-    );
+    const dom = <React.Fragment>
+      <label htmlFor="bar">bar</label>
+      <input type="text" onChange={() => {
+      console.log("Clicked.");
+    }} />
+    </React.Fragment>
+    
+    ;
+    return dom;
   }
 };
 
