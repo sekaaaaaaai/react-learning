@@ -1,44 +1,47 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 // import logo from './logo.svg';
 
-class App extends Component{
-  render() {
-    const profiles = [
-      {name: "Taro", age: 17},
-      {name: "Hanako", age: 5},
-      {name: "Rio", age: null}
-    ]
+// class App extends Component{
+//   render() {
+//     return <Counter/>;
+//   }
+// };
 
-    const dom = <React.Fragment>
-      <div>
-        {
-          profiles.map((profile, index) => {
-            return <User name={profile.name} age={profile.age} key={index}/>
-          })
-        }
-      </div>
-    </React.Fragment>
-    ;
-    return dom;
+const App = () => (<Counter />)
+
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: 0};
+  }
+
+  render() {
+    console.log("render");
+    return(
+      <React.Fragment>
+        <div>
+          count: {this.state.count}
+        </div>
+        <button onClick={this.handleMinusButton}>-1</button>
+        <button onClick={this.handlePlusButton}>+1</button>
+      </React.Fragment>
+    );
+  }
+
+  handlePlusButton = () => {
+    console.log("PlusButton tapped!!");
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
+
+  handleMinusButton = () => {
+    console.log("PlusButton tapped!!");
+    this.setState({
+      count: this.state.count - 1
+    });
   }
 };
 
-const User = (props) => {
-  return (
-    <div>
-      Hi, I am {props.name}!
-      and {props.age} years old.
-    </div>
-  )
-}
-
-User.defaultProps = {
-}
-
-User.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.number.isRequired
-}
 
 export default App;
