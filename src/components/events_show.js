@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { getEvent, deleteEvent, putEvent } from '../actions';
+import {
+  Button,
+  TextField
+} from '@material-ui/core';
 
 class EventsShow extends Component {
 
@@ -17,13 +21,19 @@ class EventsShow extends Component {
     if (id) this.props.getEvent(id)
   }
 
-  renderField(field) {
+  renderTextField(field) {
     const { input, label, type, meta: {touched, error} } = field
 
     return (
     <div>
-      <input {...input} placeholder={label} type={type}/>
-      {touched && error && <span>{error}</span>}
+      <TextField
+        {...input}
+        placeholder={label} 
+        label={label}
+        type={type}
+        error={touched && error}
+        helperText={touched && error}
+      />
     </div>
     );
   }
@@ -41,17 +51,21 @@ class EventsShow extends Component {
 
   render() {
     const {handleSubmit, pristine, submitting, invalid} = this.props
+    const buttonStyle = {
+      margin: 12
+    }
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <div>
-          <Field label="Title" name="title" type="text" component={this.renderField}/>
-          <Field label="Body" name="body" type="text" component={this.renderField}/>
+          <Field label="Title" name="title" type="text" component={this.renderTextField}/>
+          <Field label="Body" name="body" type="text" component={this.renderTextField}/>
 
           <div>
-            <input type="submit" value="Submit" disabled={pristine || submitting || invalid} />
-            <Link to="/">Cancel</Link>
-            <Link to="/" onClick={this.onDeleteClick}>Delete</Link>
+            <Button variant='contained' style={buttonStyle} type="submit" value="Submit" disabled={pristine || submitting || invalid}>Submit</Button>
+            <Button variant='contained' style={buttonStyle} href="/">Cancel</Button>
+            <Button variant='contained' color= 'secondary' style={buttonStyle} onClick={this.onDeleteClick} >Delete</Button>
+            
           </div>
         </div>
       </form>

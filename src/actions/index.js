@@ -8,7 +8,7 @@ export const UPDATE_EVENT = 'UPDATE_EVENT'
 
 
 const ROOT_URL = 'https://udemy-utils.herokuapp.com/api/v1';
-const QUERY_STRING = '?token=token123';
+const QUERY_STRING = '?token=adolman';
 
 export const readEvents = () => async dispatch => {
   const response = await axios.get(`${ROOT_URL}/events${QUERY_STRING}`);
